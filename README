@@ -1,0 +1,11 @@
+eth_cksum computes and prints the lower/uppercase checksum used
+  with Ethereum addresses
+
+eth_mewseed21st converts a mnemonic (a list of words) into the first
+  Ethereum address, the same way MyEtherWallet would
+  (name: mew=myetherwallet seed 2=to 1st=first_address)
+
+Dependencies:
+	keccak-256sum from https://github.com/maandree/sha3sum
+	bx from https://github.com/libbitcoin/libbitcoin-explorer
+	xxd

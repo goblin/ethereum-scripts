@@ -1,0 +1,32 @@
+#! /usr/bin/env perl
+
+use strict;
+use warnings;
+
+sub print_checksummed_address {
+        my $addr = lc($_[0]);
+        $addr =~ s/^0x//;
+        my $hash = `echo -n $addr | keccak-256sum`;
+
+        my @addr = split //, $addr;
+        my @hash = split //, $hash;
+
+        print "0x";
+
+        for(my $i = 0; $i < length($addr); $i++) {
+                if($addr[$i] =~ /[a-fA-F]/) {
+                        if($hash[$i] =~ /[89a-fA-F]/) {
+                         print uc($addr[$i]);
+                        } else {
+                         print lc($addr[$i]);
+                        }
+                } else {
+                        print $addr[$i];
+                }
+        }
+
+        print "\n";
+}
+
+map { print_checksummed_address($_); } @ARGV;
+

@@ -1,0 +1,5 @@
+#! /bin/bash
+
+MNEMONIC="$1"
+
+bx mnemonic-to-seed $MNEMONIC | bx hd-new | bx hd-private -d -i 44 | bx hd-private -d -i 60 | bx hd-private -d -i 0 | bx hd-private -i 0 | bx hd-private -i 0 | bx hd-to-ec | bx ec-to-public -u | xxd -r -ps | tail -c +2 | keccak-256sum -l | xxd -r -ps | tail -c 20 | xxd -ps | xargs eth_cksum
